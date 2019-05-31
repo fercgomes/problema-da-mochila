@@ -3,7 +3,7 @@
 
 \usepackage{amsmath}
 
-\title{Problema da Mochila}
+\title{Problema da Mochila Binária}
 \author{Fernando Gomes, Leonardo Holtz}
 \institute{Universidade Federal do Rio Grande do Sul}
 \date{}
@@ -21,15 +21,40 @@
 
 % CARACTERIZAÇÃO DO PROBLEMA
 \section{Caracterização do problema}
+
 \begin{frame}
-\frametitle{Caracterização do problema}
-lorem ipsum aheuheuaheuaheuhauaeh
+\frametitle{Definição intuitiva}
+
+    Dado um conjunto de itens $\phi$, com cada item $x_{i}$ tendo um peso $p_{i}$
+    e um custo $c_{i}$, qual a escolha de itens tal que a soma de seus pesos é menor
+    que a capacidade $P_{m}$ de uma mochila a soma de seus custos é a maior possível?
+
 \end{frame}
 
-% PROVA QUE PERTENCE A NP
-\section{Problema da mochila $\in$ NP}
 \begin{frame}
-    \frametitle{Problema da mochila $\in$ NP}
+\frametitle{Definição matemática}
+
+    Dados uma mochila com capacidade máxima $W$, um conjunto de $n$ itens $x_{1}, x_{2}, ..., x_{n}$,
+    cada um com um peso $w_{i}$ e um valor $v_{i}$:\\
+
+    \begin{equation*}
+        \text{maximizar} \sum_{i=1}^{n} v_{i} x_{i}
+    \end{equation*}
+
+    \begin{equation*}
+        \mbox{sujeito a } \sum_{i=1}^{n} w_{i} x_{i} \leq W \mbox{ e } x_{i} \in \{0,1\}
+    \end{equation*}
+
+    Neste caso, $x_{i}$ representa o número de instâncias do item $i$ dentro da mochila.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% PROVA QUE PERTENCE A NP
+\section{Problema da mochila binária $\in$ NP}
+\begin{frame}
+\frametitle{Problema da mochila binária $\in$ NP}
 \end{frame}
 
 \subsection{Algoritmo de verificação}
@@ -44,9 +69,9 @@ lorem ipsum aheuheuaheuaheuhauaeh
 
 
 % PROVA QUE PERTENCE A NP-DIFICIL
-\section{Prova que pertence a NP-difícil}
+\section{Problema da mochila binária $\in$ NP-difícil}
 \begin{frame}
-\frametitle{Problema da mochila $\in$ NP-difícil}
+\frametitle{Problema da mochila binária $\in$ NP-difícil}
 \end{frame}
 
 \subsection{Problema NP-difícil usado}
