@@ -1,7 +1,9 @@
 \documentclass{beamer}
 \usetheme{Pittsburgh}
+\usecolortheme{rose}
 
 \usepackage{amsmath}
+\usepackage{fancyvrb}
 
 \title{Problema da Mochila Binária}
 \author{Fernando Gomes, Leonardo Holtz}
@@ -39,7 +41,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Definição matemática}
+\frametitle{Definição matemática: problema de otimização}
 
     Dados uma mochila com capacidade máxima $W$, um conjunto de $n$ itens $x_{1}, x_{2}, ..., x_{n}$,
     cada um com um peso $w_{i}$ e um valor $v_{i}$:\\
@@ -57,6 +59,27 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Definição matemática: problema de decisão}
+
+    Dados uma mochila com capacidade máxima $W$, um valor mínimo $V$, um conjunto de $n$ itens $x_{1}, x_{2}, ..., x_{n}$,
+    cada um com um peso $w_{i}$ e um valor $v_{i}$:\\
+
+    \begin{equation*}
+        \text{maximizar} \sum_{i=1}^{n} v_{i} x_{i} \text{ t.q.}
+    \end{equation*}
+
+    \begin{equation*}
+        \begin{split}
+            &\quad \sum_{i=1}^{n} w_{i} x_{i} \leq W \mbox{ e } x_{i} \in \{0,1\} \\
+            &\quad \sum_{i=1}^{n} v_{i} x_{i} \geq V \mbox{ e } x_{i} \in \{0,1\} \text{ ?}
+        \end{split}
+    \end{equation*}
+
+    O problema de decisão se torna: "Existe um seleção de $x_{i}$ que satisfaça essa definição?"
+
+\end{frame}
+
+\begin{frame}
 \frametitle{Aplicações}
 
 Aplicações e blabalblabla
@@ -67,13 +90,34 @@ Aplicações e blabalblabla
 
 % PROVA QUE PERTENCE A NP
 \section{Problema da mochila binária $\in$ NP}
-\begin{frame}
-\frametitle{Problema da mochila binária $\in$ NP}
-\end{frame}
 
 \subsection{Algoritmo de verificação}
 \begin{frame}
-\frametitle{Algoritmo de verificação}
+    \frametitle{Algoritmo de verificação}
+    Para provar que PM\footnotemark $\in$ NP, precisamos mostrar que existe um algoritmo
+    capaz de verificar se um certificado do PM é correto.
+
+    \footnotetext[1]{PM = Problema da mochila binária}
+\end{frame}
+
+
+\begin{frame}[fragile]
+    \frametitle{Algoritmo em pseudocódigo}
+
+    P: conjunto de pesos $p_{i}$ \\
+    V: conjunto de valores $v_{i}$ \\
+    VMIN: valor minímo para o problema de decisão \\
+    W: carga máxima da mochila \\
+    CERTIFICADO: seleção $x_{1},...,x_{n}\ t.q.\ x \in \{0,1\}$ \\
+
+    \begin{block}{Pré-algoritmo}
+    \begin{semiverbatim}
+    VerificaPM(P, V, VMIN, W, CERTIFICADO)
+        ...
+        returns SIM or NÃO
+    \end{semiverbatim}
+    \end{block}
+
 \end{frame}
 
 \subsection{Análise de complexidade}
