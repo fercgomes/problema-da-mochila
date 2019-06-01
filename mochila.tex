@@ -128,8 +128,8 @@ Aplicações e blabalblabla
         2.    PesoTotal = 0
         3.    ValorTotal = 0
         4.    for i in 1:n
-        5.        PesoTotal += P[i] * W[i]
-        6.        ValorTotal += V[i] * V[i]
+        5.        PesoTotal += CERTIFICADO[i] * P[i]
+        6.        ValorTotal += CERTIFICADO[i] * V[i]
         7.    endfor
         8.    if PesoTotal <= W && ValorTotal > VMIN
         9.        return True
