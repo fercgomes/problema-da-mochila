@@ -95,7 +95,7 @@ Aplicações e blabalblabla
 \begin{frame}
     \frametitle{Algoritmo de verificação}
     Para provar que PM\footnotemark $\in$ NP, precisamos mostrar que existe um algoritmo
-    capaz de verificar se um certificado do PM é correto.
+    capaz de verificar se um certificado do PM é correto em tempo polinomial.
 
     \footnotetext[1]{PM = Problema da mochila binária}
 \end{frame}
@@ -108,11 +108,12 @@ Aplicações e blabalblabla
     V: conjunto de valores $v_{i}$ \\
     VMIN: valor minímo para o problema de decisão \\
     W: carga máxima da mochila \\
+    n: tamanho do problema
     CERTIFICADO: seleção $x_{1},...,x_{n}\ t.q.\ x \in \{0,1\}$ \\
 
     \begin{block}{Pré-algoritmo}
     \begin{semiverbatim}
-    VerificaPM(P, V, VMIN, W, CERTIFICADO)
+    VerificaPM(P, V, VMIN, W, n, CERTIFICADO)
         ...
         returns SIM or NÃO
     \end{semiverbatim}
@@ -120,21 +121,59 @@ Aplicações e blabalblabla
 
 \end{frame}
 
+\begin{frame}[fragile]
+    \begin{block}{Algoritmo completo}
+        \begin{semiverbatim}
+        1. VerificaPM(P, V, VMIN, W, n, CERTIFICADO)
+        2.    PesoTotal = 0
+        3.    ValorTotal = 0
+        4.    for i in 1:n
+        5.        PesoTotal += P[i] * W[i]
+        6.        ValorTotal += V[i] * V[i]
+        7.    endfor
+        8.    if PesoTotal <= W && ValorTotal > VMIN
+        9.        return True
+        10.    else
+        11.       return false
+        \end{semiverbatim}
+    \end{block}
+
+\end{frame}
+
 \subsection{Análise de complexidade}
 \begin{frame}
-\frametitle{Análise de complexidade}
+    \frametitle{Análise de complexidade}
+
+    \begin{itemize}
+        \item As atribuições das linhas 2 e 3 tem complexidade $\mathcal{O}(1)$.
+
+        \item O laço $for$ executa $n$ vezes, e a complexidade das atribuições e multiplicações são constantes.
+            A complexidade total do laço é $\mathcal{O}(n)$
+
+        \item A complexidade total do algoritmo é, portanto, $\mathcal{O}(n)$.
+        \item O problema da mochila (como problema de decisão) pode, então, ser verificado em tempo polinomial.
+              Com isso concluímos que pertence ao conjunto $NP$.
+    \end{itemize}
+
 \end{frame}
 
 
 % PROVA QUE PERTENCE A NP-DIFICIL
 \section{Problema da mochila binária $\in$ NP-difícil}
-\begin{frame}
-\frametitle{Problema da mochila binária $\in$ NP-difícil}
-\end{frame}
 
 \subsection{Problema NP-difícil usado}
 \begin{frame}
-\frametitle{}
+    \frametitle{Soma de subconjuntos}
+    \begin{itemize}
+        \item
+            Para demonstrar que PM $\in$ NP-difícil, utilizaremos uma redução do problema
+            da soma de subconjuntos para o problema da mochila.
+        \item
+            Note que estamos utilizando problemas de decisão, mas se demonstrarmos que
+            eles pertencem a NP-difícil, é evidente que o problema de otimização associado
+            também será NP-difícil (o problema de decisão é mais "fácil").
+    \end{itemize}
+
 \end{frame}
 
 \subsection{Redução inst A para inst B}
