@@ -75,7 +75,7 @@
         \end{split}
     \end{equation*}
 
-    O problema de decisão se torna: "Existe um seleção de $x_{i}$ que satisfaça essa definição?"
+    O problema de decisão se torna: "Existe uma seleção de $x_{i}$ que satisfaça essa definição?"
 
 \end{frame}
 
@@ -108,7 +108,7 @@ Aplicações e blabalblabla
     V: conjunto de valores $v_{i}$ \\
     VMIN: valor minímo para o problema de decisão \\
     W: carga máxima da mochila \\
-    n: tamanho do problema
+    n: tamanho do problema \\
     CERTIFICADO: seleção $x_{1},...,x_{n}\ t.q.\ x \in \{0,1\}$ \\
 
     \begin{block}{Pré-algoritmo}
@@ -167,7 +167,7 @@ Aplicações e blabalblabla
     \begin{itemize}
         \item
             Para demonstrar que PM $\in$ NP-difícil, utilizaremos uma redução do problema
-            da soma de subconjuntos para o problema da mochila.
+            da soma de subconjuntos, que já sabemos que é NP-completo, para o problema da mochila.
         \item
             Note que estamos utilizando problemas de decisão, mas se demonstrarmos que
             eles pertencem a NP-difícil, é evidente que o problema de otimização associado
@@ -178,31 +178,88 @@ Aplicações e blabalblabla
 
 % DEFINICAO SOMA DE SUBCONJUNTOS
 \begin{frame}
-    \framtitle{Soma de subconjuntos}
-    \begin{itemize}
-        \item
-            Dado um conjunto de $n$ números inteiros positivos $a_{1}, a_{2}, ..., a_{n}$, e dado um valor $b$, existe um subconjunto destes números tal que
-             \begin{equation*}
-                \sum_{i=1}^{n} a_{i} x_{i} \eq b \mbox{ e } x_{i} \in \{0,1\}
-             \end{equation*}
-	\end{itemize}
-
+    \frametitle{Soma de subconjuntos}
+        Dado um conjunto de $n$ números inteiros positivos $a_{1}, a_{2}, ..., a_{n}$, e um valor $t \geq 0$ , existe um subconjunto destes números tal que:
+         \begin{equation*}
+            \sum_{i=1}^{n} a_{i} x_{i} = t \mbox{ e } x_{i} \in \{0,1\}
+         \end{equation*}
+        $x_{i}$ indica se $a_{i}$ faz parte do subconjunto (1) ou não (0)
+        \newline
+        \newline
+        O problema de decisão é similar ao anterior: "Existe uma seleção de $a_{i}$ que satisfaça essa definição?"
 \end{frame}
 
-
+% REDUCAO DAS INSTANCIAS DE A PARA INSTANCIAS DE B
 \subsection{Redução inst A para inst B}
 \begin{frame}
-\frametitle{Redução inst A para inst B}
+    \frametitle{Redução inst A para inst B}
+        A redução das instâncias do Problema da Mochila para a Soma de subconjuntos é trivial, já que devemos somar um subconjunto de valores a partir de todo um conjunto em ambos os casos.
+        \newline
+        \newline
+        Para todos os $n$ itens $x_{1}, x_{2}, ..., x_{n}$ fazemos a seguinte transformação:
+        \begin{equation*}
+            w_{i} = a_{i}
+        \end{equation*}
+        \begin{equation*}
+            v_{i} = a_{i}
+        \end{equation*}
+        Para a capacidade máxima $W$ e o valor mínimo $V$, fazemos a seguinte transformação:
+        \begin{equation*}
+            W = t
+        \end{equation*}
+        \begin{equation*}
+            V = t
+        \end{equation*}
+        
 \end{frame}
 
-\subsection{Algoritmo de redução}
 \begin{frame}
-\frametitle{Algoritmo de redução}
+    \frametitle{Redução inst A para inst B}
+        Com isso, conseguimos mapear as exatas mesmas respostas do problema de decisão da Soma de subconjuntos para o problema de decisão da Mochila.
+         \begin{equation*}
+            \sum_{i=1}^{n} w_{i} x_{i} \leq W \mbox{ terá as mesmas respostas (sim ou não) que } \sum_{i=1}^{n} a_{i} x_{i} = t
+         \end{equation*}
+         \begin{equation*}
+            \sum_{i=1}^{n} v_{i} x_{i} \geq V \mbox{ terá as mesmas respostas (sim ou não) que } \sum_{i=1}^{n} a_{i} x_{i} = t
+         \end{equation*}
 \end{frame}
 
+% ALGORITMO DE REDUCAO
+\subsection{Algoritmo de redução}
+\begin{frame}[fragile]
+\frametitle{Algoritmo de redução}
+    n: tamanho do problema \\
+    t: soma total formada por um subconjunto dos valores $a_{i}$ \\
+    a: vetor com os valores $a_{i}$ \\
+    \begin{block}{Algoritmo de Redução}
+        \begin{semiverbatim}
+        1. ReducaoSSCparaPM(n, t, a)
+        2.    W = t
+        3.    V = t
+        4.    for i in 1:n
+        5.        w[i] = a[i]
+        6.        v[i] = a[i]
+        7.    endfor
+        8.    return n, w, v, W, V
+        \end{semiverbatim}
+    \end{block}
+\end{frame}
+
+% ANALISE DA COMPLEXIDADE
 \subsection{Análise da complexidade}
 \begin{frame}
 \frametitle{Análise da complexidade}
+    \begin{itemize}
+        \item As atribuições das linhas 2 e 3 tem complexidade $\mathcal{O}(1)$.
+
+        \item Nas linhas 4 a 7, o laço $for$ executa $n$ vezes, e a complexidade das atribuições são constantes.
+            A complexidade total do laço é $\mathcal{O}(n)$.
+        \item O retorno na linha 8 é constante.
+        \item A complexidade total do algoritmo é, portanto, $\mathcal{O}(n)$.
+        \item Com isso, provamos que o Problema da Mochila $\in$ NP-difícil.
+        
+        \item Já que provamos que o Problema da Mochila $\in$ NP e que o Problema da Mochila $\in$ NP-difícil, automaticamente provamos que ele também $\in$ NP-completo.
+    \end{itemize}
 \end{frame}
 
 \section{Referências}
@@ -211,4 +268,5 @@ Aplicações e blabalblabla
 \end{frame}
 
 \end{document}
+
 
