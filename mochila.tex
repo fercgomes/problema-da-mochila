@@ -216,7 +216,7 @@
         A redução das instâncias do Problema da Mochila para a Soma de subconjuntos é trivial, já que devemos somar um subconjunto de valores a partir de todo um conjunto em ambos os casos.
         \newline
         \newline
-        Para todos os $n$ itens $x_{1}, x_{2}, ..., x_{n}$ fazemos a seguinte transformação:
+        Para todos os $n$ elementos $a_{1}, a_{2}, ..., a_{n}$ fazemos a seguinte transformação:
         \begin{equation*}
             w_{i} = a_{i}
         \end{equation*}
@@ -242,6 +242,38 @@
          \begin{equation*}
             \sum_{i=1}^{n} v_{i} x_{i} \geq V \mbox{ terá as mesmas respostas (sim ou não) que } \sum_{i=1}^{n} a_{i} x_{i} = t
          \end{equation*}
+\end{frame}
+
+% EXEMPLO DE REDUÇÃO
+\begin{frame}
+    \frametitle{Redução PM para SSC: Exemplo}
+        Considerando o conjunto $a = \{2, 3, 5, 7, 10\}$ e um valor $t = 17$, a redução se dá da seguinte forma:
+        \begin{equation*}
+            w_{i} = a_{i} \longrightarrow w = \{2, 3, 5, 7, 10\}
+        \end{equation*}
+        \begin{equation*}
+            v_{i} = a_{i} \longrightarrow v = \{2, 3, 5, 7, 10\}
+        \end{equation*}
+        \begin{equation*}
+            W = t \longrightarrow W = 17
+        \end{equation*}
+        \begin{equation*}
+            V = t \longrightarrow V = 17
+         \end{equation*}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Redução PM para SSC: Exemplo}
+        O problema da SSC, com o conjunto $a = \{2, 3, 5, 7, 10\}$ e um valor $t = 17$ possui solução.
+        Uma solução válida é o subconjunto \{2, 3, 5, 7\}.\\
+        Após a redução, temos que este mesmo subconjunto é também uma solução válida para o Problema da Mochila:
+        \begin{equation*}
+            \mbox{Peso máximo da mochila: } 2 + 3 + 5 + 7 \leq W = 17
+        \end{equation*}
+        \begin{equation*}
+            \mbox{Valor mínimo da mochila: } 2 + 3 + 5 + 7 \geq V = 17
+        \end{equation*}
+
 \end{frame}
 
 % ALGORITMO DE REDUCAO
@@ -273,13 +305,23 @@
     \begin{itemize}
         \item As atribuições das linhas 2 e 3 tem complexidade $\mathcal{O}(1)$.
 
-        \item Nas linhas 4 a 7, o laço $for$ executa $n$ vezes, e a complexidade das atribuições são constantes.
-            A complexidade total do laço é $\mathcal{O}(n)$.
-        \item O retorno na linha 8 é constante.
+        \item Nas linhas 4 a 7, o laço $for$ executa $n$ vezes com duas atribuições que são constantes. Isso é expresso pelo seguinte somatório
+         \begin{equation*}
+            \sum_{i=1}^{n} 2
+         \end{equation*}
+        A resolução do somatório é dada por $2n$, logo, a complexidade total do laço é $\mathcal{O}(n)$.
+        \item O retorno na linha 8 tem a complexidade $\mathcal{O}(1)$.
         \item A complexidade total do algoritmo é, portanto, $\mathcal{O}(n)$.
-        \item Com isso, provamos que o Problema da Mochila $\in$ NP-difícil.
-        
-        \item Já que provamos que o Problema da Mochila $\in$ NP e que o Problema da Mochila $\in$ NP-difícil, automaticamente provamos que ele também $\in$ NP-completo.
+        \item Como a complexidade da redução está dentro do tempo polinomial, provamos que o Problema da Mochila $\in$ NP-difícil.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{NP-completude do Problema da Mochila}
+    \begin{itemize}
+        \item Foi provado que existe um algoritmo de verificação para o Problema da Mochila em tempo polinomial, logo, temos que o Problema da Mochila $\in$ NP.
+        \item Foi provado também que existe uma redução em tempo polinomial do problema da Soma de Subconjuntos para o Problema da Mochila, logo, temos também que o Problema da Mochila $\in$ NP-difícil.
+        \item Com isso, concluímos que o Problema da Mochila $\in$ NP-completo.
     \end{itemize}
 \end{frame}
 \end{document}
@@ -287,5 +329,5 @@
 
 % TODO:
 % exemplos dos problemas e otimização e decisão
-% somatórios na análise de complexidade
-% exemplos de redução
+% somatórios na análise de complexidade (feita na parte de redução)
+% exemplos de redução (feito)
